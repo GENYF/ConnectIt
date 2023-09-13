@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "305896379489",
+    "project_id": "connectit-dev",
+    "storage_bucket": "connectit-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305896379489:android:7e721dd84d4248a5db8620",
+        "android_client_info": {
+          "package_name": "com.example.connectit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA09pdRWmnxy0b9v-xgkqxLda1eLG6elKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
