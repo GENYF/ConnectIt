@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '305896379489',
     projectId: 'connectit-dev',
     storageBucket: 'connectit-dev.appspot.com',
+    androidClientId: '305896379489-fmr5nsoksbacj47nt07uunhltuhhv085.apps.googleusercontent.com',
+    iosClientId: '305896379489-8abnt9ehvkoa0b32treiqfu0am3b0hje.apps.googleusercontent.com',
     iosBundleId: 'com.connectit.connectit',
   );
 }
