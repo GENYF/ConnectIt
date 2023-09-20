@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "305896379489",
+    "project_id": "connectit-dev",
+    "storage_bucket": "connectit-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305896379489:android:23f251543785a0e6db8620",
+        "android_client_info": {
+          "package_name": "com.connectit.connectit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305896379489-fmr5nsoksbacj47nt07uunhltuhhv085.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.connectit.connectit",
+            "certificate_hash": "cc73f4b9bef2d400cb6b0d11179da6b2bee718ec"
+          }
+        },
+        {
+          "client_id": "305896379489-0hqtu063rh5jtq400roofun5flckkapa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA09pdRWmnxy0b9v-xgkqxLda1eLG6elKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305896379489-0hqtu063rh5jtq400roofun5flckkapa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "305896379489-8abnt9ehvkoa0b32treiqfu0am3b0hje.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.connectit.connectit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
