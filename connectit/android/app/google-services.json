@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:305896379489:android:7e721dd84d4248a5db8620",
+        "mobilesdk_app_id": "1:305896379489:android:23f251543785a0e6db8620",
         "android_client_info": {
-          "package_name": "com.example.connectit"
+          "package_name": "com.connectit.connectit"
         }
       },
       "oauth_client": [],

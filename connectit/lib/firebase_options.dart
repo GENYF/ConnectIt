@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA09pdRWmnxy0b9v-xgkqxLda1eLG6elKo',
-    appId: '1:305896379489:android:7e721dd84d4248a5db8620',
+    appId: '1:305896379489:android:23f251543785a0e6db8620',
     messagingSenderId: '305896379489',
     projectId: 'connectit-dev',
     storageBucket: 'connectit-dev.appspot.com',
@@ -59,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyA3doFFJTQIjnmussMBUxEHTB3AXv7QODg',
-    appId: '1:305896379489:ios:15b193d269a70540db8620',
+    appId: '1:305896379489:ios:85ef6ef235be84d1db8620',
     messagingSenderId: '305896379489',
     projectId: 'connectit-dev',
     storageBucket: 'connectit-dev.appspot.com',
-    iosBundleId: 'com.example.connectit',
+    iosBundleId: 'com.connectit.connectit',
   );
 }
