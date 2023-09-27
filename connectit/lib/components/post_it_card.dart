@@ -29,9 +29,10 @@ class PostItCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        width: MediaQuery.of(context).size.width - defaultSpacing * 2,
+        width: MediaQuery.of(context).size.width - ((defaultSpacing + defaultSpacingQuarter) * 2),
         padding: const EdgeInsets.all(defaultSpacingHalf),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(

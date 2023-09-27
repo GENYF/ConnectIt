@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../components/post_it_card.dart';
+import '../../models/post_it.dart';
+import '../../utils/design.dart';
+import '../../utils/tester.dart';
+
 class StorageScreen extends StatelessWidget {
   const StorageScreen({super.key});
 
@@ -20,13 +25,69 @@ class StorageScreen extends StatelessWidget {
           icon: const Icon(Icons.delete_outline),
         ),
       ],
+      scrolledUnderElevation: 0,
     );
   }
 
   Widget _buildBody(BuildContext context) {
-    return const SafeArea(
-      child: Center(
-        child: Text('Storage'),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: defaultSpacing),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
+                child: Text('내가 때어간 포스트잇', style: DesignerTextStyle.title1),
+              ),
+              const SizedBox(height: defaultSpacing),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (PostIt postIt in postItsTester)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
+                        child: PostItCard(
+                          title: postIt.title,
+                          description: postIt.description,
+                          keywords: postIt.keywords,
+                          snsIds: postIt.snsIds,
+                          isShowSnsIds: true,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: defaultDoubleSpacing),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
+                child: Text('나를 때어간 포스트잇', style: DesignerTextStyle.title1),
+              ),
+              const SizedBox(height: defaultSpacing),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (PostIt postIt in postItsTester)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
+                        child: PostItCard(
+                          title: postIt.title,
+                          description: postIt.description,
+                          keywords: postIt.keywords,
+                          snsIds: postIt.snsIds,
+                          isShowSnsIds: true,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
