@@ -12,26 +12,30 @@ class KeywordListWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: defaultSpacingHalf,
-      runSpacing: defaultSpacingHalf,
-      children: _keywords.map((keyword) {
-        return FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: defaultSpacingHalf, vertical: defaultSpacingQuarter),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
-              color: Colors.black87,
+    return SizedBox(
+      width: double.infinity,
+      child: Wrap(
+        alignment: WrapAlignment.spaceEvenly,
+        spacing: defaultSpacingHalf,
+        runSpacing: defaultSpacingHalf,
+        children: _keywords.map((keyword) {
+          return FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: defaultSpacingHalf, vertical: defaultSpacingQuarter),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(defaultBorderRadius),
+                color: Colors.black87,
+              ),
+              child: Text(
+                '#$keyword',
+                style: DesignerTextStyle.paragraph3.apply(color: Colors.white),
+              ),
             ),
-            child: Text(
-              '#$keyword',
-              style: DesignerTextStyle.paragraph3.apply(color: Colors.white),
-            ),
-          ),
-        );
-      }).toList(),
+          );
+        }).toList(),
+      ),
     );
   }
 }
