@@ -25,6 +25,7 @@ class ProfileScreen extends StatelessWidget {
           icon: const Icon(Icons.settings_outlined),
         ),
       ],
+      centerTitle: false,
       scrolledUnderElevation: 0,
     );
   }

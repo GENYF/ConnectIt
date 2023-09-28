@@ -25,6 +25,7 @@ class StorageScreen extends StatelessWidget {
           icon: const Icon(Icons.delete_outline),
         ),
       ],
+      centerTitle: false,
       scrolledUnderElevation: 0,
     );
   }

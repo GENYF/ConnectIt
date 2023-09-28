@@ -29,6 +29,7 @@ class BoardScreen extends StatelessWidget {
           icon: const Icon(Icons.notifications_outlined),
         ),
       ],
+      centerTitle: false,
       scrolledUnderElevation: 0,
     );
   }
