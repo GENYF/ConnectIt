@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/design.dart';
 
-class UserInfoCard extends StatelessWidget {
-  const UserInfoCard({
+class ProfileInfoCard extends StatelessWidget {
+  const ProfileInfoCard({
     required String userProfileUrl,
     required String userName,
     required String userEmail,

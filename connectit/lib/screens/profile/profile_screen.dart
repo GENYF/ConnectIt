@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../components/post_it_card.dart';
 import '../../models/sns_ids.dart';
 import '../../utils/design.dart';
-import 'components/user_info_card.dart';
+import 'components/profile_info_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -40,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
             children: <Widget>[
               Text('내 정보', style: DesignerTextStyle.title1),
               const SizedBox(height: defaultSpacing),
-              const UserInfoCard(
+              const ProfileInfoCard(
                 userProfileUrl: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
                 userName: 'Jason Thomas Mraz',
                 userEmail: 'JasonMraz@gmail.com',
