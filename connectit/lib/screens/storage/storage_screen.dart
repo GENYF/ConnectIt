@@ -22,7 +22,7 @@ class StorageScreen extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.delete_outline),
+          icon: const Icon(Icons.notifications_outlined),
         ),
       ],
       centerTitle: false,
@@ -86,6 +86,7 @@ class StorageScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: defaultDoubleSpacing),
             ],
           ),
         ),
