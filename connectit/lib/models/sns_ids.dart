@@ -1,19 +1,32 @@
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SnsIds {
-  SnsIds({
-    @required String? instagramId,
-    @required String? facebookId,
-    @required String? kakaotalkId,
-  }) : _instagramId = instagramId,
-       _facebookId = facebookId,
-       _kakaotalkId = kakaotalkId;
+  String? kakaotalk;
+  String? instagram;
+  String? facebook;
 
-  final String? _instagramId;
-  final String? _facebookId;
-  final String? _kakaotalkId;
+  SnsIds.initialize({
+    this.kakaotalk,
+    this.instagram,
+    this.facebook,
+  });
 
-  String? get instagramId => _instagramId;
-  String? get facebookId => _facebookId;
-  String? get kakaotalkId => _kakaotalkId;
+  SnsIds.fromFirestore({
+    required DocumentSnapshot<Map<String, dynamic>> snapshot,
+    SnapshotOptions? options,
+  }) {
+    final data = snapshot.data()?['myPost']['snsIds'];
+
+    kakaotalk = data?['kakaotalk'];
+    instagram =  data?['instagram'];
+    facebook = data?['facebook'];
+  }
+
+  Map<String, dynamic> toFirestore() {
+    return {
+      'kakaotalk': kakaotalk ?? '',
+      'instagram': instagram ?? '',
+      'facebook': facebook ?? '',
+    };
+  }
 }

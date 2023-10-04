@@ -51,10 +51,10 @@ class BoardScreen extends StatelessWidget {
                 itemCount: postItsTester.length,
                 itemBuilder: (BuildContext context, int index) {
                   return PostItCard(
-                    title: postItsTester[index].title,
-                    description: postItsTester[index].description,
-                    keywords: postItsTester[index].keywords,
-                    snsIds: postItsTester[index].snsIds,
+                    title: postItsTester[index].title!,
+                    description: postItsTester[index].description!,
+                    keywords: postItsTester[index].keywords!,
+                    snsIds: postItsTester[index].snsIds!,
                     isShowSnsIds: false,
                   );
                 },

@@ -19,26 +19,26 @@ class SnsListWrap extends StatelessWidget {
       runSpacing: defaultSpacingHalf,
       children: [
         Visibility(
-          visible: _snsIds.kakaotalkId != null,
+          visible: _snsIds.kakaotalk != null,
           child: SnsIdButton(
             snsLogoPath: 'assets/images/logos/kakaotalk.png',
-            snsId: _snsIds.kakaotalkId!,
+            snsId: _snsIds.kakaotalk!,
             onTap: () {},
           ),
         ),
         Visibility(
-          visible: _snsIds.instagramId != null,
+          visible: _snsIds.instagram != null,
           child: SnsIdButton(
             snsLogoPath: 'assets/images/logos/instagram.png',
-            snsId: _snsIds.instagramId!,
+            snsId: _snsIds.instagram!,
             onTap: () {},
           ),
         ),
         Visibility(
-          visible: _snsIds.facebookId != null,
+          visible: _snsIds.facebook != null,
           child: SnsIdButton(
             snsLogoPath: 'assets/images/logos/facebook.png',
-            snsId: _snsIds.facebookId!,
+            snsId: _snsIds.facebook!,
             onTap: () {},
           ),
         ),

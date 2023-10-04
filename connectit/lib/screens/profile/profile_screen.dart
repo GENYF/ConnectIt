@@ -59,10 +59,10 @@ class ProfileScreen extends StatelessWidget {
                 title: 'Hello! I\'m Jason Mraz',
                 description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
                 keywords: const ['INTJ', 'Developer', 'Computer Science', 'Junior', 'Music', 'Photo', 'Movie', 'Book', 'Game', 'Travel', 'Coffee'],
-                snsIds: SnsIds(
-                  instagramId: 'instagram_id',
-                  facebookId: 'facebook_id',
-                  kakaotalkId: 'kakaotalk_id',
+                snsIds: SnsIds.initialize(
+                  instagram: 'instagram_id',
+                  facebook: 'facebook_id',
+                  kakaotalk: 'kakaotalk_id',
                 ),
                 isShowSnsIds: true,
               ),

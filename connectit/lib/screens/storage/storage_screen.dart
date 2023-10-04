@@ -52,10 +52,10 @@ class StorageScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
                         child: PostItCard(
-                          title: postIt.title,
-                          description: postIt.description,
-                          keywords: postIt.keywords,
-                          snsIds: postIt.snsIds,
+                          title: postIt.title!,
+                          description: postIt.description!,
+                          keywords: postIt.keywords!,
+                          snsIds: postIt.snsIds!,
                           isShowSnsIds: true,
                         ),
                       ),
@@ -76,10 +76,10 @@ class StorageScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
                         child: PostItCard(
-                          title: postIt.title,
-                          description: postIt.description,
-                          keywords: postIt.keywords,
-                          snsIds: postIt.snsIds,
+                          title: postIt.title!,
+                          description: postIt.description!,
+                          keywords: postIt.keywords!,
+                          snsIds: postIt.snsIds!,
                           isShowSnsIds: true,
                         ),
                       ),
