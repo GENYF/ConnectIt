@@ -1,3 +1,5 @@
+import 'package:connectit/screens/post/post_screen.dart';
+import 'package:connectit/screens/profile/components/profile_section_title.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/post_it_card.dart';
@@ -38,16 +40,21 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('내 정보', style: DesignerTextStyle.title1),
-              const SizedBox(height: defaultSpacing),
+              const ProfileSectionTitle(
+                title: '내 정보',
+                isEditable: false,
+              ),
               const ProfileInfoCard(
                 userProfileUrl: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
                 userName: 'Jason Thomas Mraz',
                 userEmail: 'JasonMraz@gmail.com',
               ),
               const SizedBox(height: defaultDoubleSpacing),
-              Text('내 포스트', style: DesignerTextStyle.title1),
-              const SizedBox(height: defaultSpacing),
+              ProfileSectionTitle(
+                title: '내 포스트',
+                isEditable: true,
+                onPressed: () => _onPressedMyPost(context),
+              ),
               PostItCard(
                 title: 'Hello! I\'m Jason Mraz',
                 description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
@@ -59,9 +66,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 isShowSnsIds: true,
               ),
+              const SizedBox(height: defaultDoubleSpacing),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _onPressedMyPost(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PostScreen(),
       ),
     );
   }
