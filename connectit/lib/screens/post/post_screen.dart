@@ -1,3 +1,4 @@
+import 'package:connectit/providers/board_provider.dart';
 import 'package:connectit/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class _PostScreenState extends State<PostScreen> {
   final TextEditingController _instagramIdController = TextEditingController();
   final TextEditingController _facebookIdController = TextEditingController();
 
-  String _selectedMBTI = MBTI.values.first.name;
+  String _selectedMBTI = '';
 
   @override
   void initState() {
@@ -165,6 +166,7 @@ class _PostScreenState extends State<PostScreen> {
 
   Future<void> _onPressedSave() async {
     ProfileProvider profileProvider = context.read<ProfileProvider>();
+    BoardProvider boardProvider = context.read<BoardProvider>();
 
     if (_kakaoTalkIdController.text.isNotEmpty || _facebookIdController.text.isNotEmpty || _instagramIdController.text.isNotEmpty) {
       profileProvider.setPostIt(
@@ -177,7 +179,9 @@ class _PostScreenState extends State<PostScreen> {
         instagramId: _instagramIdController.text,
         facebookId: _facebookIdController.text,
       ).then((_) {
-        Navigator.pop(context);
+        boardProvider.updatePostIt(postIt: profileProvider.postIt!).then((_) {
+          Navigator.pop(context);
+        });
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

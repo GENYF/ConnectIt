@@ -22,7 +22,7 @@ class PostMbtiSelectCard extends StatelessWidget {
           child: DropdownMenu<MBTI>(
             width: MediaQuery.of(context).size.width - 72,
             menuHeight: MediaQuery.of(context).size.height * 0.3,
-            initialSelection: MBTI.values.firstWhere((element) => element.name == _initialSelection),
+            initialSelection: _initialSelection!.isNotEmpty ? MBTI.values.firstWhere((element) => element.name == _initialSelection) : null,
             onSelected: (MBTI? value) => _onSelected(value),
             hintText: 'MBTI를 선택해주세요!',
             dropdownMenuEntries: MBTI.values.map((e) => DropdownMenuEntry(value: e, label: e.name)).toList(),

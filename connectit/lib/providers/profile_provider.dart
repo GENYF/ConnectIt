@@ -16,10 +16,12 @@ class ProfileProvider with ChangeNotifier {
   get postIt => _postIt;
   
   Future<void> initialize({required User user}) async {
-    await setUser(user: user);
+    await setUser(user: user).then((_) async {
+      await _load();
+    });
   }
 
-  Future<void> reload() async {
+  Future<void> _load() async {
     await _firestoreService.readUserCollection(user: _user!).then((value) {
       _user = value?.user;
       _postIt = value?.postIt;
@@ -54,6 +56,7 @@ class ProfileProvider with ChangeNotifier {
     required String facebookId,
   }) async {
     _postIt = PostIt.initialize(
+      uid: _user!.uid,
       title: title,
       description: description,
       mbti: mbti,

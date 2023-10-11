@@ -46,7 +46,6 @@ class ProfileScreen extends StatelessWidget {
               ApplicationUser user = profileProvider.user;
               PostIt? postIt = profileProvider.postIt;
 
-
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -77,7 +76,7 @@ class ProfileScreen extends StatelessWidget {
                   else ... [
                     Text(
                       '아직 작성한 포스트가 없습니다.',
-                      style: DesignerTextStyle.paragraph2,
+                      style: DesignerTextStyle.paragraph3,
                     ),
                     const SizedBox(height: defaultSpacing),
                     NextButton(

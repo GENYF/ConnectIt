@@ -1,3 +1,4 @@
+import 'package:connectit/providers/board_provider.dart';
 import 'package:connectit/providers/profile_provider.dart';
 import 'package:connectit/screens/route_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => BoardProvider())
       ],
       child: MaterialApp(
         title: 'Alledin',

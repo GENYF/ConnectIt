@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/board_provider.dart';
 import 'loading_screen.dart';
 import 'login/login_screen.dart';
 
@@ -17,7 +18,7 @@ class RouteScreen extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<User?> user) {
         if (user.hasData) {
           return FutureBuilder(
-              future: _initializationUser(context: context, user: user.data!),
+              future: _initializationProvider(context: context, user: user.data!),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return const TabScreen();
@@ -33,11 +34,12 @@ class RouteScreen extends StatelessWidget {
     );
   }
 
-  Future<bool> _initializationUser({required BuildContext context, required User user}) async {
+  Future<bool> _initializationProvider({required BuildContext context, required User user}) async {
     final profileProvider = context.read<ProfileProvider>();
+    final boardProvider = context.read<BoardProvider>();
 
-    await profileProvider.initialize(user: user).then((value) async {
-      await profileProvider.reload();
+    await profileProvider.initialize(user: user).then((_) async {
+      await boardProvider.initialize(user: profileProvider.user);
     });
 
     return true;

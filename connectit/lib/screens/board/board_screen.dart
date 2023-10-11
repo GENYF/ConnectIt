@@ -1,8 +1,11 @@
+import 'package:connectit/providers/board_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/post_it_card.dart';
+import '../../models/post_it.dart';
+import '../../providers/profile_provider.dart';
 import '../../utils/design.dart';
-import '../../utils/tester.dart';
 import 'components/board_fab.dart';
 
 class BoardScreen extends StatelessWidget {
@@ -14,7 +17,7 @@ class BoardScreen extends StatelessWidget {
       appBar: _buildAppBar(context),
       body: _buildBody(context),
       floatingActionButton: BoardFAB(
-        onTap: () {},
+        onTap: () => _onTapFAB(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -25,8 +28,8 @@ class BoardScreen extends StatelessWidget {
       title: const Text('ConnectIt'),
       actions: [
         IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.notifications_outlined),
+          onPressed: () => _onPressedAction(context),
+          icon: const Icon(Icons.refresh_outlined),
         ),
       ],
       centerTitle: false,
@@ -45,27 +48,63 @@ class BoardScreen extends StatelessWidget {
             children: [
               Text('포스트잇 목록', style: DesignerTextStyle.title1),
               const SizedBox(height: defaultSpacing),
-              ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: postItsTester.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return PostItCard(
-                    title: postItsTester[index].title!,
-                    description: postItsTester[index].description!,
-                    keywords: postItsTester[index].keywords!,
-                    snsIds: postItsTester[index].snsIds!,
-                    isShowSnsIds: false,
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(height: defaultSpacingHalf);
-                },
+              Consumer<BoardProvider>(
+                builder: (BuildContext context, BoardProvider boardProvider, Widget? child) {
+                  List<PostIt>? postIts = boardProvider.postIts;
+
+                  if (postIts != null) {
+                    return ListView.separated(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: postIts.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return PostItCard(
+                          title: postIts[index].title!,
+                          description: postIts[index].description!,
+                          keywords: postIts[index].keywords!,
+                          snsIds: postIts[index].snsIds!,
+                          isShowSnsIds: false,
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(height: defaultSpacingHalf);
+                      },
+                    );
+                  } else {
+                    return Text(
+                      '현재 보드에 붙여져있는 포스트잇이 없습니다.',
+                      style: DesignerTextStyle.paragraph3,
+                    );
+                  }
+                }
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _onPressedAction(BuildContext context) async {
+    BoardProvider boardProvider = context.read<BoardProvider>();
+
+    await boardProvider.refresh();
+  }
+
+  void _onTapFAB(BuildContext context) async {
+    BoardProvider boardProvider = context.read<BoardProvider>();
+    ProfileProvider profileProvider = context.read<ProfileProvider>();
+
+    await boardProvider.addPostIt(postIt: profileProvider.postIt).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            '내 포스트잇을 보드에 붙였습니다.',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    });
   }
 }
