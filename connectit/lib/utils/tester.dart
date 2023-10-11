@@ -4,6 +4,7 @@ import '../models/post_it.dart';
 
 List<PostIt> postItsTester = [
   PostIt.initialize(
+    uid: 'uid_1',
     title: 'Test Post It 1',
     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
     mbti: 'ENTP',
@@ -16,6 +17,7 @@ List<PostIt> postItsTester = [
     ),
   ),
   PostIt.initialize(
+    uid: 'uid_2',
     title: 'Test Post It 2',
     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
     mbti: 'INTJ',
@@ -28,6 +30,7 @@ List<PostIt> postItsTester = [
     ),
   ),
   PostIt.initialize(
+    uid: 'uid_3',
     title: 'Test Post It 3',
     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
     mbti: 'INTP',
@@ -40,6 +43,7 @@ List<PostIt> postItsTester = [
     ),
   ),
   PostIt.initialize(
+    uid: 'uid_4',
     title: 'Test Post It 4',
     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
     mbti: 'ENTJ',
@@ -52,6 +56,7 @@ List<PostIt> postItsTester = [
     ),
   ),
   PostIt.initialize(
+    uid: 'uid_5',
     title: 'Test Post It 5',
     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
     mbti: 'ENTP',

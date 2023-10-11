@@ -15,7 +15,7 @@ class SnsIds {
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   }) {
-    final data = snapshot.data()?['myPost']['snsIds'];
+    final data = snapshot.data()?['postIt']['snsIds'];
 
     kakaotalk = data?['kakaotalk'];
     instagram =  data?['instagram'];

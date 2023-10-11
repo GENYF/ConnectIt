@@ -23,16 +23,16 @@ class FirestoreUserDTO {
     final data = snapshot.data();
 
     FirestoreUserDTO firestoreUserDTO =  FirestoreUserDTO(
-      user: data?['myInfo'] != null ? ApplicationUser.fromFirestore(
+      user: data?['info'] != null ? ApplicationUser.fromFirestore(
         snapshot: snapshot,
         options: options,
       ) : null,
-      postIt: data?['myPost'] != null ? PostIt.fromFirestore(
+      postIt: data?['postIt'] != null ? PostIt.fromFirestore(
         snapshot: snapshot,
         options: options,
       ) : null,
-      activePost: data?['activePost'] is Iterable ? List.from(data?['activePost']) : [],
-      passivePost: data?['passivePost'] is Iterable ? List.from(data?['passivePost']) : [],
+      activePost: data?['activePostIt'] is Iterable ? List.from(data?['activePostIt']) : [],
+      passivePost: data?['passivePostIt'] is Iterable ? List.from(data?['passivePostIt']) : [],
     );
 
     return firestoreUserDTO;

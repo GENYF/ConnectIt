@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/sns_ids.dart';
 
 class PostIt {
+  String? uid;
   String? title;
   String? description;
   String? mbti;
@@ -12,6 +13,7 @@ class PostIt {
   SnsIds? snsIds;
 
   PostIt.initialize({
+    required this.uid,
     required this.title,
     required this.description,
     required this.mbti,
@@ -24,7 +26,7 @@ class PostIt {
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   }) {
-    final data = snapshot.data()?['myPost'];
+    final data = snapshot.data()?['postIt'];
 
     title = data?['title'];
     description = data?['description'];

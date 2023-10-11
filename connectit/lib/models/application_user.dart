@@ -17,7 +17,7 @@ class ApplicationUser {
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   }) {
-    final data = snapshot.data()?['myInfo'];
+    final data = snapshot.data()?['info'];
 
     uid = data?['uid'];
     name = data?['name'];
