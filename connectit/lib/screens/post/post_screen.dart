@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../enums/mbti.dart';
 import '../../utils/design.dart';
 import 'components/post_mbti_select_card.dart';
-import 'components/post_save_button.dart';
+import '../../components/next_button.dart';
 import 'components/post_sns_ids_edit_card.dart';
 import 'components/post_text_edit_card.dart';
 
@@ -113,8 +113,9 @@ class _PostScreenState extends State<PostScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(defaultSpacing),
-            child: PostSaveButton(
+            child: NextButton(
               onPressed: () => _onPressedSave(),
+              label: '포스트 저장하기',
             ),
           ),
         ],
