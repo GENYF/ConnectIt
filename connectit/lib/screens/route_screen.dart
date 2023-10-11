@@ -36,7 +36,9 @@ class RouteScreen extends StatelessWidget {
   Future<bool> _initializationUser({required BuildContext context, required User user}) async {
     final profileProvider = context.read<ProfileProvider>();
 
-    await profileProvider.initializeUser(user: user);
+    await profileProvider.initialize(user: user).then((value) async {
+      await profileProvider.reload();
+    });
 
     return true;
   }

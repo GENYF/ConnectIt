@@ -16,13 +16,13 @@ class FirestoreService {
 
   /// USERS COLLECTION
 
-  Future<void> setUser({required ApplicationUser user}) async {
+  Future<void> createUserCollection({required ApplicationUser user}) async {
     await _firestore.collection('users').doc(user.uid).set({
       'myInfo': user.toFirestore(),
-    });
+    }, SetOptions(merge: true));
   }
 
-  Future<FirestoreUserDTO?> getUser({required ApplicationUser user}) async {
+  Future<FirestoreUserDTO?> readUserCollection({required ApplicationUser user}) async {
     FirestoreUserDTO firestoreUserDTO = FirestoreUserDTO();
 
     firestoreUserDTO = await _firestore.collection('users').doc(user.uid).get().then((value) {
@@ -32,7 +32,7 @@ class FirestoreService {
     return firestoreUserDTO;
   }
 
-  Future<void> updateUser({
+  Future<void> updateUserCollection({
     required ApplicationUser user,
     PostIt? postIt,
     List<String>? activePost,
@@ -44,5 +44,9 @@ class FirestoreService {
       'activePost': activePost ?? [],
       'passivePost': passivePost ?? [],
     });
+  }
+
+  Future<void> deleteUserCollection({required ApplicationUser user}) async {
+    await _firestore.collection('users').doc(user.uid).delete();
   }
 }

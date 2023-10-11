@@ -1,4 +1,6 @@
+import 'package:connectit/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../enums/mbti.dart';
 import '../../utils/design.dart';
@@ -23,17 +25,17 @@ class _PostScreenState extends State<PostScreen> {
   final TextEditingController _instagramIdController = TextEditingController();
   final TextEditingController _facebookIdController = TextEditingController();
 
-  late String _selectedMBTI;
+  String _selectedMBTI = MBTI.values.first.name;
+
+  @override
+  void initState() {
+    _initField();
+    super.initState();
+  }
 
   @override
   void dispose() {
-    _titleController.dispose();
-    _descriptionController.dispose();
-    _hobbiesController.dispose();
-    _topicsController.dispose();
-    _kakaoTalkIdController.dispose();
-    _instagramIdController.dispose();
-    _facebookIdController.dispose();
+    _disposField();
     super.dispose();
   }
 
@@ -82,6 +84,7 @@ class _PostScreenState extends State<PostScreen> {
                     Text('나의 MBTI', style: DesignerTextStyle.title1),
                     PostMbtiSelectCard(
                       onSelected: (MBTI? value) => _onSelectedMbti(value),
+                      initialSelection: _selectedMBTI,
                     ),
                     const SizedBox(height: defaultDoubleSpacing),
                     Text('나의 취미', style: DesignerTextStyle.title1),
@@ -94,7 +97,7 @@ class _PostScreenState extends State<PostScreen> {
                     const SizedBox(height: defaultDoubleSpacing),
                     Text('나의 관심사', style: DesignerTextStyle.title1),
                     PostTextEditCard(
-                      textEditingController: _hobbiesController,
+                      textEditingController: _topicsController,
                       hintText: '관심사를 쉼표(,)로 구분하여 적어주세요!',
                       maxLength: 128,
                       maxLines: 3,
@@ -123,11 +126,69 @@ class _PostScreenState extends State<PostScreen> {
     );
   }
 
+  void _initField() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ProfileProvider profileProvider = context.read<ProfileProvider>();
+
+      _titleController.text = profileProvider.postIt?.title ?? '';
+      _descriptionController.text = profileProvider.postIt?.description ?? '';
+      _hobbiesController.text = profileProvider.postIt?.hobbies.join(', ') ?? '';
+      _topicsController.text = profileProvider.postIt?.topics.join(', ') ?? '';
+
+      setState(() {
+        _selectedMBTI = profileProvider.postIt?.mbti ?? '';
+      });
+
+      if (profileProvider.postIt?.snsIds != null) {
+        _kakaoTalkIdController.text = profileProvider.postIt?.snsIds?.kakaotalk ?? '';
+        _instagramIdController.text = profileProvider.postIt?.snsIds?.instagram ?? '';
+        _facebookIdController.text = profileProvider.postIt?.snsIds?.facebook ?? '';
+      }
+    });
+  }
+
+  void _disposField() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    _hobbiesController.dispose();
+    _topicsController.dispose();
+    _kakaoTalkIdController.dispose();
+    _instagramIdController.dispose();
+    _facebookIdController.dispose();
+  }
+
   void _onSelectedMbti(MBTI? value) {
     setState(() {
       _selectedMBTI = value!.name;
     });
   }
 
-  void _onPressedSave() {}
+  Future<void> _onPressedSave() async {
+    ProfileProvider profileProvider = context.read<ProfileProvider>();
+
+    if (_kakaoTalkIdController.text.isNotEmpty || _facebookIdController.text.isNotEmpty || _instagramIdController.text.isNotEmpty) {
+      profileProvider.setPostIt(
+        title: _titleController.text,
+        description: _descriptionController.text,
+        mbti: _selectedMBTI,
+        hobbies: _hobbiesController.text,
+        topics: _topicsController.text,
+        kakaotalkId: _kakaoTalkIdController.text,
+        instagramId: _instagramIdController.text,
+        facebookId: _facebookIdController.text,
+      ).then((_) {
+        Navigator.pop(context);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            'SNS ID를 하나 이상 입력해주세요.',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+  }
 }

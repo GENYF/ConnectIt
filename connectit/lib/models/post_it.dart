@@ -31,6 +31,7 @@ class PostIt {
     mbti = data?['mbti'];
     hobbies = data?['hobbies'] is Iterable ? List.from(data?['hobbies']) : [];
     topics = data?['topics'] is Iterable ? List.from(data?['topics']) : [];
+    keywords = [mbti!] + hobbies! + topics!;
     snsIds = SnsIds.fromFirestore(
       snapshot: snapshot,
       options: options,
@@ -44,7 +45,6 @@ class PostIt {
       'mbti': mbti ?? '',
       'hobbies': hobbies ?? [],
       'topics': topics ?? [],
-      'keywords': keywords ?? [],
       'snsIds': snsIds?.toFirestore(),
     };
   }

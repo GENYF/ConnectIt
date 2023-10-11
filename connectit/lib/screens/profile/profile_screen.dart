@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import '../../components/post_it_card.dart';
 import '../../models/post_it.dart';
-import '../../models/sns_ids.dart';
 import '../../utils/design.dart';
 import 'components/profile_info_card.dart';
 

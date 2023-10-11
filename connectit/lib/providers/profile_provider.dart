@@ -15,7 +15,22 @@ class ProfileProvider with ChangeNotifier {
   get user => _user;
   get postIt => _postIt;
   
-  Future<void> initializeUser({required User user}) async {
+  Future<void> initialize({required User user}) async {
+    await setUser(user: user);
+  }
+
+  Future<void> reload() async {
+    await _firestoreService.readUserCollection(user: _user!).then((value) {
+      _user = value?.user;
+      _postIt = value?.postIt;
+    });
+
+    notifyListeners();
+  }
+
+  Future<void> setUser({
+    required User user,
+  }) async {
     _user = ApplicationUser.initialize(
       uid: user.uid,
       name: user.displayName!,
@@ -23,20 +38,18 @@ class ProfileProvider with ChangeNotifier {
       photoURL: user.photoURL!,
     );
 
-    await _firestoreService.setUser(user: _user!);
-    await _firestoreService.getUser(user: _user!).then((value) {
-      _user = value?.user;
-      _postIt = value?.postIt;
-    });
+    await _firestoreService.createUserCollection(user: _user!);
+
+    notifyListeners();
   }
 
-  Future<void> updatePostIt({
+  Future<void> setPostIt({
     required String title,
     required String description,
     required String mbti,
     required String hobbies,
     required String topics,
-    required String kakakotalkId,
+    required String kakaotalkId,
     required String instagramId,
     required String facebookId,
   }) async {
@@ -47,15 +60,17 @@ class ProfileProvider with ChangeNotifier {
       hobbies: hobbies.replaceAll(' ', '').split(','),
       topics: topics.replaceAll(' ', '').split(','),
       snsIds: SnsIds.initialize(
-        kakaotalk: kakakotalkId,
+        kakaotalk: kakaotalkId,
         instagram: instagramId,
         facebook: facebookId,
       ),
     );
 
-    await _firestoreService.updateUser(
+    await _firestoreService.updateUserCollection(
       user: _user!,
       postIt: postIt,
     );
+
+    notifyListeners();
   }
 }
