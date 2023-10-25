@@ -71,6 +71,7 @@ class ProfileScreen extends StatelessWidget {
                       keywords: postIt.keywords!,
                       snsIds: postIt.snsIds!,
                       isShowSnsIds: true,
+                      isOnTap: false,
                     ),
                   ]
                   else ... [

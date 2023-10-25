@@ -64,6 +64,8 @@ class BoardScreen extends StatelessWidget {
                           keywords: postIts[index].keywords!,
                           snsIds: postIts[index].snsIds!,
                           isShowSnsIds: false,
+                          isOnTap: true,
+                          onTap: () => _onTapPostIt(context),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
@@ -106,5 +108,25 @@ class BoardScreen extends StatelessWidget {
         ),
       );
     });
+  }
+
+  void _onTapPostIt(BuildContext context) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('포스트잇을 때어가겠습니까?', style: DesignerTextStyle.title2),
+        content: Text('포스트잇을 때어가면 나의 보관함과 상대방의 보관함에 서로의 포스트잇이 보관됩니다.', style: DesignerTextStyle.paragraph3),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('아니요', style: TextStyle(color: Colors.black54)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('네', style: TextStyle(color: Colors.black87)),
+          ),
+        ],
+      ),
+    );
   }
 }
