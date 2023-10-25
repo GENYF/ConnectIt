@@ -59,7 +59,7 @@ class _SigningAgreementNoticeState extends State<SigningAgreementNotice> {
           icon: _hasAgreed
               ? const Icon(
                   Icons.check_box,
-                  color: Colors.blue,
+                  color: Colors.black87,
                   size: 24,
                 )
               : const Icon(

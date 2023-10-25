@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/design.dart';
+import '../utils/design.dart';
 
-class ProfileSectionTitle extends StatelessWidget {
-  const ProfileSectionTitle({
+class SectionTitle extends StatelessWidget {
+  const SectionTitle({
     required String title,
-    required bool isEditable,
+    required bool isAction,
     Function? onPressed,
     super.key,
   }) :  _title = title,
-        _isEditable = isEditable,
+        _isEditable = isAction,
         _onPressed = onPressed;
 
   final String _title;

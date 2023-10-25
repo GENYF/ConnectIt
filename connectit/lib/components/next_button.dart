@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/design.dart';
+import '../utils/design.dart';
 
-class PostSaveButton extends StatelessWidget {
-  const PostSaveButton({
+class NextButton extends StatelessWidget {
+  const NextButton({
     required Function onPressed,
+    required String label,
     super.key,
-  }) :  _onPressed = onPressed;
+  }) :  _onPressed = onPressed,
+        _label = label;
 
   final Function _onPressed;
+  final String _label;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class PostSaveButton extends StatelessWidget {
         height: 56,
         child: Center(
           child: Text(
-            '포스트 저장하기',
+            _label,
             style: DesignerTextStyle.header3.apply(color: Colors.white),
           ),
         ),

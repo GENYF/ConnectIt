@@ -1,9 +1,13 @@
+import 'package:connectit/components/next_button.dart';
+import 'package:connectit/models/application_user.dart';
+import 'package:connectit/providers/profile_provider.dart';
 import 'package:connectit/screens/post/post_screen.dart';
-import 'package:connectit/screens/profile/components/profile_section_title.dart';
+import 'package:connectit/components/section_title.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/post_it_card.dart';
-import '../../models/sns_ids.dart';
+import '../../models/post_it.dart';
 import '../../utils/design.dart';
 import 'components/profile_info_card.dart';
 
@@ -37,37 +41,54 @@ class ProfileScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(defaultSpacing),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const ProfileSectionTitle(
-                title: '내 정보',
-                isEditable: false,
-              ),
-              const ProfileInfoCard(
-                userProfileUrl: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
-                userName: 'Jason Thomas Mraz',
-                userEmail: 'JasonMraz@gmail.com',
-              ),
-              const SizedBox(height: defaultDoubleSpacing),
-              ProfileSectionTitle(
-                title: '내 포스트',
-                isEditable: true,
-                onPressed: () => _onPressedMyPost(context),
-              ),
-              PostItCard(
-                title: 'Hello! I\'m Jason Mraz',
-                description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500',
-                keywords: const ['INTJ', 'Developer', 'Computer Science', 'Junior', 'Music', 'Photo', 'Movie', 'Book', 'Game', 'Travel', 'Coffee'],
-                snsIds: SnsIds(
-                  instagramId: 'instagram_id',
-                  facebookId: 'facebook_id',
-                  kakaotalkId: 'kakaotalk_id',
-                ),
-                isShowSnsIds: true,
-              ),
-              const SizedBox(height: defaultDoubleSpacing),
-            ],
+          child: Consumer<ProfileProvider>(
+            builder: (BuildContext context, ProfileProvider profileProvider, Widget? child) {
+              ApplicationUser user = profileProvider.user;
+              PostIt? postIt = profileProvider.postIt;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SectionTitle(
+                    title: '나의 정보',
+                    isAction: false,
+                  ),
+                  ProfileInfoCard(
+                    userProfileUrl: user.photoURL!,
+                    userName: user.name!,
+                    userEmail: user.email!,
+                  ),
+                  const SizedBox(height: defaultDoubleSpacing),
+                  SectionTitle(
+                    title: '나의 포스트',
+                    isAction: true,
+                    onPressed: () => _onPressedMyPost(context),
+                  ),
+                  if (postIt != null) ... [
+                    PostItCard(
+                      title: postIt.title!,
+                      description: postIt.description!,
+                      keywords: postIt.keywords!,
+                      snsIds: postIt.snsIds!,
+                      isShowSnsIds: true,
+                      isOnTap: false,
+                    ),
+                  ]
+                  else ... [
+                    Text(
+                      '아직 작성한 포스트가 없습니다.',
+                      style: DesignerTextStyle.paragraph3,
+                    ),
+                    const SizedBox(height: defaultSpacing),
+                    NextButton(
+                      onPressed: () => _onPressedMyPost(context),
+                      label: '새 포스트 작성하기',
+                    ),
+                  ],
+                  const SizedBox(height: defaultDoubleSpacing),
+                ],
+              );
+            }
           ),
         ),
       ),
