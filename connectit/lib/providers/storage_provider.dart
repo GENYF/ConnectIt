@@ -40,13 +40,13 @@ class StorageProvider with ChangeNotifier {
   }
 
   Future<void> createPostIt({required PostIt postIt}) async {
-    await _firestoreService.updateStorageCollection(user: _user!, postIt: postIt).then((_) async {
+    await _firestoreService.updateAddStorageCollection(user: _user!, postIt: postIt).then((_) async {
       await _load();
     });
   }
 
   Future<void> removePostIt({required PostIt postIt}) async {
-    await _firestoreService.deleteStorageCollection(user: _user!, postIt: postIt).then((_) async {
+    await _firestoreService.updateSubCollection(user: _user!, postIt: postIt).then((_) async {
       await _load();
     });
   }

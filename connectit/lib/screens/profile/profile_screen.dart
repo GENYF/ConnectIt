@@ -3,6 +3,7 @@ import 'package:connectit/models/application_user.dart';
 import 'package:connectit/providers/profile_provider.dart';
 import 'package:connectit/screens/post/post_screen.dart';
 import 'package:connectit/components/section_title.dart';
+import 'package:connectit/screens/setting/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
       title: const Text('ConnectIt'),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () => _onPressedAction(context),
           icon: const Icon(Icons.settings_outlined),
         ),
       ],
@@ -91,6 +92,15 @@ class ProfileScreen extends StatelessWidget {
             }
           ),
         ),
+      ),
+    );
+  }
+
+  void _onPressedAction(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SettingScreen(),
       ),
     );
   }

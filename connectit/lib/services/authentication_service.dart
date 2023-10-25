@@ -3,7 +3,6 @@ import 'package:connectit/utils/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationService {
   static final AuthenticationService _instance = AuthenticationService._internal();
@@ -92,9 +91,7 @@ class AuthenticationService {
         break;
     }
 
-    await _firebaseAuth.signOut().then((_) async {
-      await _clearData();
-    });
+    await _firebaseAuth.signOut();
   }
 
   Future<void> _signOutFromGoogle() async {
@@ -104,14 +101,6 @@ class AuthenticationService {
 
   Future<void> _signOutFromApple() async {
     await _firebaseAuth.signOut();
-  }
-
-  /// append datas to delete when user signs out
-  Future<void> _clearData() async {
-    // 디스크 저장 내용 삭제
-    await SharedPreferences.getInstance().then((sharedPreferences) {
-      sharedPreferences.clear();
-    });
   }
 }
 
