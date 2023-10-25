@@ -2,7 +2,7 @@ import 'package:connectit/components/next_button.dart';
 import 'package:connectit/models/application_user.dart';
 import 'package:connectit/providers/profile_provider.dart';
 import 'package:connectit/screens/post/post_screen.dart';
-import 'package:connectit/screens/profile/components/profile_section_title.dart';
+import 'package:connectit/components/section_title.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -49,9 +49,9 @@ class ProfileScreen extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const ProfileSectionTitle(
-                    title: '내 정보',
-                    isEditable: false,
+                  const SectionTitle(
+                    title: '나의 정보',
+                    isAction: false,
                   ),
                   ProfileInfoCard(
                     userProfileUrl: user.photoURL!,
@@ -59,9 +59,9 @@ class ProfileScreen extends StatelessWidget {
                     userEmail: user.email!,
                   ),
                   const SizedBox(height: defaultDoubleSpacing),
-                  ProfileSectionTitle(
-                    title: '내 포스트',
-                    isEditable: true,
+                  SectionTitle(
+                    title: '나의 포스트',
+                    isAction: true,
                     onPressed: () => _onPressedMyPost(context),
                   ),
                   if (postIt != null) ... [

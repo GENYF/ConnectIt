@@ -34,7 +34,7 @@ class PostItCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _isOnTap ? _onTap!() : null,
+      onTap: () => _isOnTap ? _onTap!() : {},
       child: Card(
         child: Container(
           width: MediaQuery.of(context).size.width - ((defaultSpacing + defaultSpacingQuarter) * 2),

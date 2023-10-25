@@ -1,3 +1,4 @@
+import 'package:connectit/components/section_title.dart';
 import 'package:connectit/providers/board_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,8 +47,7 @@ class BoardScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('포스트잇 목록', style: DesignerTextStyle.title1),
-              const SizedBox(height: defaultSpacing),
+              const SectionTitle(title: '포스트잇 목록', isAction: false),
               Consumer<BoardProvider>(
                 builder: (BuildContext context, BoardProvider boardProvider, Widget? child) {
                   List<PostIt>? postIts = boardProvider.postIts;
@@ -65,7 +65,7 @@ class BoardScreen extends StatelessWidget {
                           snsIds: postIts[index].snsIds!,
                           isShowSnsIds: false,
                           isOnTap: true,
-                          onTap: () => _onTapPostIt(context),
+                          onTap: () => _onTapPostIt(context, postIt: postIts[index]),
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
@@ -97,7 +97,7 @@ class BoardScreen extends StatelessWidget {
     BoardProvider boardProvider = context.read<BoardProvider>();
     ProfileProvider profileProvider = context.read<ProfileProvider>();
 
-    await boardProvider.addPostIt(postIt: profileProvider.postIt).then((_) {
+    await boardProvider.attachPostIt(postIt: profileProvider.postIt).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           duration: Duration(seconds: 2),
@@ -110,7 +110,7 @@ class BoardScreen extends StatelessWidget {
     });
   }
 
-  void _onTapPostIt(BuildContext context) {
+  void _onTapPostIt(BuildContext context, {required PostIt postIt}) async {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -118,7 +118,7 @@ class BoardScreen extends StatelessWidget {
         content: Text('포스트잇을 때어가면 나의 보관함과 상대방의 보관함에 서로의 포스트잇이 보관됩니다.', style: DesignerTextStyle.paragraph3),
         actions: <Widget>[
           TextButton(
-            onPressed: () => Navigator.pop(context, 'Cancel'),
+            onPressed: () => Navigator.pop(context),
             child: const Text('아니요', style: TextStyle(color: Colors.black54)),
           ),
           TextButton(

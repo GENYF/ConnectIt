@@ -33,7 +33,7 @@ class BoardProvider with ChangeNotifier {
     _user = user;
   }
 
-  Future<void> addPostIt({required PostIt postIt}) async {
+  Future<void> attachPostIt({required PostIt postIt}) async {
     await _firestoreService.createPostCollection(user: _user!, postIt: postIt).then((_) async {
       await _load();
     });
@@ -41,6 +41,12 @@ class BoardProvider with ChangeNotifier {
 
   Future<void> updatePostIt({required PostIt postIt}) async {
     await _firestoreService.updatePostCollection(user: _user!, postIt: postIt).then((_) async {
+      await _load();
+    });
+  }
+
+  Future<void> detachPostIt({required PostIt postIt}) async {
+    await _firestoreService.deletePostCollection(user: _user!).then((_) async {
       await _load();
     });
   }

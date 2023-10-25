@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../components/post_it_card.dart';
+import '../../components/section_title.dart';
 import '../../models/post_it.dart';
 import '../../utils/design.dart';
 import '../../utils/tester.dart';
@@ -39,11 +40,10 @@ class StorageScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
-                child: Text('내가 때어간 포스트잇', style: DesignerTextStyle.title1),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: defaultSpacing),
+                child: SectionTitle(title: '내가 선택한 포스트잇', isAction: false),
               ),
-              const SizedBox(height: defaultSpacing),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -57,32 +57,7 @@ class StorageScreen extends StatelessWidget {
                           keywords: postIt.keywords!,
                           snsIds: postIt.snsIds!,
                           isShowSnsIds: true,
-                          isOnTap: true,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: defaultDoubleSpacing),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
-                child: Text('나를 때어간 포스트잇', style: DesignerTextStyle.title1),
-              ),
-              const SizedBox(height: defaultSpacing),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    for (PostIt postIt in postItsTester)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
-                        child: PostItCard(
-                          title: postIt.title!,
-                          description: postIt.description!,
-                          keywords: postIt.keywords!,
-                          snsIds: postIt.snsIds!,
-                          isShowSnsIds: true,
-                          isOnTap: true,
+                          isOnTap: false,
                         ),
                       ),
                   ],
