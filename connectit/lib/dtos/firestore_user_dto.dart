@@ -27,7 +27,7 @@ class FirestoreUserDTO {
         snapshot: snapshot,
         options: options,
       ) : null,
-      postIt: data?['postIt'] != null ? PostIt.fromFirestore(
+      postIt: data?['postIt'] != null ? PostIt.fromFirestoreDoc(
         snapshot: snapshot,
         options: options,
       ) : null,

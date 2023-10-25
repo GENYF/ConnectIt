@@ -1,5 +1,6 @@
 import 'package:connectit/components/section_title.dart';
 import 'package:connectit/providers/board_provider.dart';
+import 'package:connectit/providers/storage_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -122,11 +123,22 @@ class BoardScreen extends StatelessWidget {
             child: const Text('아니요', style: TextStyle(color: Colors.black54)),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, 'OK'),
+            onPressed: () => _detachPostIt(context, postIt: postIt),
             child: const Text('네', style: TextStyle(color: Colors.black87)),
           ),
         ],
       ),
     );
+  }
+
+  void _detachPostIt(BuildContext context, {required PostIt postIt}) {
+    StorageProvider storageProvider = context.read<StorageProvider>();
+    BoardProvider boardProvider = context.read<BoardProvider>();
+
+    storageProvider.createPostIt(postIt: postIt).then((_) {
+      boardProvider.detachPostIt(postIt: postIt).then((_) {
+        Navigator.pop(context);
+      });
+    });
   }
 }

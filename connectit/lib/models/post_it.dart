@@ -22,7 +22,7 @@ class PostIt {
     required this.snsIds,
   }) : keywords = [mbti!] + hobbies! + topics!;
 
-  PostIt.fromFirestore({
+  PostIt.fromFirestoreDoc({
     required DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   }) {
@@ -34,9 +34,23 @@ class PostIt {
     hobbies = data?['hobbies'] is Iterable ? List.from(data?['hobbies']) : [];
     topics = data?['topics'] is Iterable ? List.from(data?['topics']) : [];
     keywords = [mbti!] + hobbies! + topics!;
-    snsIds = SnsIds.fromFirestore(
+    snsIds = SnsIds.fromFirestoreDoc(
       snapshot: snapshot,
       options: options,
+    );
+  }
+
+  PostIt.fromFirestoreData({
+    required Map<String, dynamic>? data,
+  }) {
+    title = data?['title'];
+    description = data?['description'];
+    mbti = data?['mbti'];
+    hobbies = data?['hobbies'] is Iterable ? List.from(data?['hobbies']) : [];
+    topics = data?['topics'] is Iterable ? List.from(data?['topics']) : [];
+    keywords = [mbti!] + hobbies! + topics!;
+    snsIds = SnsIds.fromFirestoreData(
+      data: data?['snsIds'],
     );
   }
 

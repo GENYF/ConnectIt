@@ -16,7 +16,7 @@ class FirestorePostDTO {
 
     FirestorePostDTO firestoreUserDTO =  FirestorePostDTO(
       postIts: docs.isNotEmpty ? docs.map((doc) {
-        return PostIt.fromFirestore(
+        return PostIt.fromFirestoreDoc(
           snapshot: doc,
           options: options,
         );

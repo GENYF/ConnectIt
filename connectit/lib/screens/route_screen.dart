@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/board_provider.dart';
+import '../providers/storage_provider.dart';
 import 'loading_screen.dart';
 import 'login/login_screen.dart';
 
@@ -37,9 +38,11 @@ class RouteScreen extends StatelessWidget {
   Future<bool> _initializationProvider({required BuildContext context, required User user}) async {
     final profileProvider = context.read<ProfileProvider>();
     final boardProvider = context.read<BoardProvider>();
+    final storageProvider = context.read<StorageProvider>();
 
     await profileProvider.initialize(user: user).then((_) async {
       await boardProvider.initialize(user: profileProvider.user);
+      await storageProvider.initialize(user: profileProvider.user);
     });
 
     return true;
