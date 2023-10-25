@@ -53,7 +53,7 @@ class BoardScreen extends StatelessWidget {
                 builder: (BuildContext context, BoardProvider boardProvider, Widget? child) {
                   List<PostIt>? postIts = boardProvider.postIts;
 
-                  if (postIts != null) {
+                  if (postIts != null && postIts.isNotEmpty) {
                     return ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
