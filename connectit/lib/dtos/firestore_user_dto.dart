@@ -6,14 +6,10 @@ import '../models/post_it.dart';
 class FirestoreUserDTO {
   final ApplicationUser? user;
   final PostIt? postIt;
-  final List<String>? activePost;
-  final List<String>? passivePost;
 
   FirestoreUserDTO({
     this.user,
     this.postIt,
-    this.activePost,
-    this.passivePost,
   });
 
   factory FirestoreUserDTO.fromFirestore({
@@ -31,8 +27,6 @@ class FirestoreUserDTO {
         snapshot: snapshot,
         options: options,
       ) : null,
-      activePost: data?['activePostIt'] is Iterable ? List.from(data?['activePostIt']) : [],
-      passivePost: data?['passivePostIt'] is Iterable ? List.from(data?['passivePostIt']) : [],
     );
 
     return firestoreUserDTO;
@@ -42,8 +36,6 @@ class FirestoreUserDTO {
     return {
       'user': user?.toFirestore(),
       'postIt': postIt?.toFirestore(),
-      'activePost': activePost,
-      'passivePost': passivePost,
     };
   }
 }

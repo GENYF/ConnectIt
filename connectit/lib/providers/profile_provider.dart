@@ -87,7 +87,7 @@ class ProfileProvider with ChangeNotifier {
 
   Future<void> withdraw () async {
     await _firestoreService.deleteUserCollection(user: _user!);
-    await _firestoreService.deletePostCollection(user: _user!);
+    await _firestoreService.deleteBoardCollection(user: _user!);
     await _firestoreService.deleteStorageCollection(user: _user!);
 
     await signOut();
