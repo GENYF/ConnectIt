@@ -58,8 +58,8 @@ class FirestoreService {
     });
   }
 
-  Future<void> deleteUserCollection({required ApplicationUser user}) async {
-    await _firestore.collection('users').doc(user.uid).delete().onError((error, stackTrace) {
+  Future<void> deleteUserCollection({required String uid}) async {
+    await _firestore.collection('users').doc(uid).delete().onError((error, stackTrace) {
       logger.e('[Firestore] 유저 정보 삭제 실패\n$error\n$stackTrace');
       
       throw Exception(error);
@@ -109,8 +109,8 @@ class FirestoreService {
     });
   }
 
-  Future<void> deleteBoardCollection({required ApplicationUser user}) async {
-    await _firestore.collection('board').doc(user.uid).delete().onError((error, stackTrace) {
+  Future<void> deleteBoardCollection({required String uid}) async {
+    await _firestore.collection('board').doc(uid).delete().onError((error, stackTrace) {
       logger.e('[Firestore] 게시글 삭제 실패\n$error\n$stackTrace');
       
       throw Exception(error);
@@ -179,8 +179,8 @@ class FirestoreService {
     });
   }
 
-  Future<void> deleteStorageCollection({required ApplicationUser user}) async {
-    await _firestore.collection('storage').doc(user.uid).delete().onError((error, stackTrace) {
+  Future<void> deleteStorageCollection({required String uid}) async {
+    await _firestore.collection('storage').doc(uid).delete().onError((error, stackTrace) {
       logger.e('[Firestore] 스토리지 삭제 실패\n$error\n$stackTrace');
       
       throw Exception(error);

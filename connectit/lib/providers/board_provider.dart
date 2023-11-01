@@ -46,7 +46,7 @@ class BoardProvider with ChangeNotifier {
   }
 
   Future<void> detachPostIt({required PostIt postIt}) async {
-    await _firestoreService.deleteBoardCollection(user: _user!).then((_) async {
+    await _firestoreService.deleteBoardCollection(uid: postIt.uid!).then((_) async {
       await _load();
     });
   }

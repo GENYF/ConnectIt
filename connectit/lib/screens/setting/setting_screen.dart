@@ -167,7 +167,7 @@ class SettingScreen extends StatelessWidget {
   void _pushRouteScreen(BuildContext context) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (BuildContext content) => RouteScreen()),
+      MaterialPageRoute(builder: (BuildContext content) => const RouteScreen()),
           (route) => false,
     );
   }
