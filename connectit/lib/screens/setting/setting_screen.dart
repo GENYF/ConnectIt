@@ -1,5 +1,6 @@
 import 'package:connectit/providers/profile_provider.dart';
 import 'package:connectit/screens/setting/components/application_info.dart';
+import 'package:connectit/screens/setting/components/open_source_information.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -43,17 +44,17 @@ class SettingScreen extends StatelessWidget {
             const SizedBox(height: defaultSpacingQuarter),
             SettingListTile(
               label: '서비스 이용약관',
-              onTapped: () => _launchInBrowser(''),
+              onTapped: () => _launchInBrowser('https://ey-labs.notion.site/ConnectIt-ae4a7ce6b5c84203be5dbb23064007f0?pvs=4'),
             ),
             const SizedBox(height: defaultSpacingQuarter),
             SettingListTile(
               label: '개인정보 처리 방침',
-              onTapped: () => _launchInBrowser(''),
+              onTapped: () => _launchInBrowser('https://ey-labs.notion.site/ConnectIt-cfb3b40cea3f4c6591c801edf9b85ae2?pvs=4'),
             ),
             const SizedBox(height: defaultSpacingQuarter),
             SettingListTile(
               label: '오픈소스 정보',
-              onTapped: () => _launchInBrowser(''),
+              onTapped: () => _onTappedOssInfo(context),
             ),
             const SettingLabel(optionName: '계정 관리'),
             SettingListTile(
@@ -87,6 +88,14 @@ class SettingScreen extends StatelessWidget {
           buttonOnPressed: () => Navigator.pop(context),
         );
       },
+    );
+  }
+
+  void _onTappedOssInfo(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const OpenSourceInformation(),
+      ),
     );
   }
 

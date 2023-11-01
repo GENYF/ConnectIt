@@ -31,7 +31,7 @@ class _SigningAgreementNoticeState extends State<SigningAgreementNotice> {
             children: <TextSpan>[
               TextSpan(
                 text: '이용약관',
-                recognizer: TapGestureRecognizer()..onTap = () => _launchInBrowser(''),
+                recognizer: TapGestureRecognizer()..onTap = () => _launchInBrowser('https://ey-labs.notion.site/ConnectIt-ae4a7ce6b5c84203be5dbb23064007f0?pvs=4'),
                 style: DesignerTextStyle.caption1.apply(
                   decoration: TextDecoration.underline,
                 ),
@@ -42,7 +42,7 @@ class _SigningAgreementNoticeState extends State<SigningAgreementNotice> {
               ),
               TextSpan(
                 text: '개인정보 처리 방침 ',
-                recognizer: TapGestureRecognizer()..onTap = () => _launchInBrowser(''),
+                recognizer: TapGestureRecognizer()..onTap = () => _launchInBrowser('https://ey-labs.notion.site/ConnectIt-cfb3b40cea3f4c6591c801edf9b85ae2?pvs=4'),
                 style: DesignerTextStyle.caption1.apply(
                   decoration: TextDecoration.underline,
                 ),
