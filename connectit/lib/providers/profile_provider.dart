@@ -37,9 +37,9 @@ class ProfileProvider with ChangeNotifier {
   }) async {
     _user = ApplicationUser.initialize(
       uid: user.uid,
-      name: user.displayName!,
-      email: user.email!,
-      photoURL: user.photoURL!,
+      name: user.displayName ?? 'Anonymous',
+      email: user.email,
+      photoURL: user.photoURL,
     );
 
     await _firestoreService.createUserCollection(user: _user!);

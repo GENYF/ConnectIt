@@ -113,7 +113,7 @@ class FirestoreService {
         });
       }
     }).onError((error, stackTrace) {
-      logger.e('[Firestore] 게시글 업데이트 실패\n$error\n$stackTrace');;
+      logger.e('[Firestore] 게시글 업데이트 실패\n$error\n$stackTrace');
 
       throw Exception(error);
     });

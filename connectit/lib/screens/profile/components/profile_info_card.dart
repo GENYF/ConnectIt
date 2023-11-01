@@ -4,7 +4,7 @@ import '../../../utils/design.dart';
 
 class ProfileInfoCard extends StatelessWidget {
   const ProfileInfoCard({
-    required String userProfileUrl,
+    required String? userProfileUrl,
     required String userName,
     required String userEmail,
     super.key,
@@ -12,7 +12,7 @@ class ProfileInfoCard extends StatelessWidget {
         _userName = userName,
         _userEmail = userEmail;
 
-  final String _userProfileUrl;
+  final String? _userProfileUrl;
   final String _userName;
   final String _userEmail;
 
@@ -26,14 +26,23 @@ class ProfileInfoCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(64.0),
-                child: Image.network(
-                  _userProfileUrl,
-                  width: 64.0,
-                  height: 64.0,
-                )
-            ),
+            if (_userProfileUrl != null && _userProfileUrl!.isNotEmpty)
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(64.0),
+                  child: Image.network(
+                    _userProfileUrl!,
+                    width: 64.0,
+                    height: 64.0,
+                  )
+              )
+            else
+              const CircleAvatar(
+                radius: 32.0,
+                child: Icon(
+                  Icons.person,
+                  size: 48.0,
+                ),
+              ),
             Padding(
               padding: const EdgeInsets.all(defaultSpacing),
               child: Column(
