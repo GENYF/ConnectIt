@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 import '../models/post_it.dart';
 import '../models/sns_ids.dart';
+import '../services/authentication_service.dart';
 
 class ProfileProvider with ChangeNotifier {
   final FirestoreService _firestoreService = FirestoreService();
+  final AuthenticationService _authenticationService = AuthenticationService();
 
   ApplicationUser? _user;
   PostIt? _postIt;
@@ -75,5 +77,19 @@ class ProfileProvider with ChangeNotifier {
     );
 
     notifyListeners();
+  }
+
+  Future<void> signOut() async {
+    await _authenticationService.signOut();
+
+    notifyListeners();
+  }
+
+  Future<void> withdraw () async {
+    await _firestoreService.deleteUserCollection(user: _user!);
+    await _firestoreService.deletePostCollection(user: _user!);
+    await _firestoreService.deleteStorageCollection(user: _user!);
+
+    await signOut();
   }
 }

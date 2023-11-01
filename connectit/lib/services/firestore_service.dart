@@ -109,7 +109,7 @@ class FirestoreService {
     return firestoreStorageDTO;
   }
 
-  Future<void> updateStorageCollection({
+  Future<void> updateAddStorageCollection({
     required ApplicationUser user,
     required PostIt postIt,
   }) async {
@@ -118,12 +118,16 @@ class FirestoreService {
     });
   }
 
-  Future<void> deleteStorageCollection({
+  Future<void> updateSubCollection({
     required ApplicationUser user,
     required PostIt postIt,
   }) async {
     await _firestore.collection('storage').doc(user.uid).update({
       'postIts': FieldValue.arrayRemove([postIt.toFirestore()]),
     });
+  }
+
+  Future<void> deleteStorageCollection({required ApplicationUser user}) async {
+    await _firestore.collection('storage').doc(user.uid).delete();
   }
 }
