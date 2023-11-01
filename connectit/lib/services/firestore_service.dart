@@ -176,7 +176,7 @@ class FirestoreService {
     });
   }
 
-  Future<void> updateSubCollection({
+  Future<void> updateSubStorageCollection({
     required ApplicationUser user,
     required PostIt postIt,
   }) async {

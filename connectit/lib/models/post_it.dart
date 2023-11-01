@@ -44,6 +44,7 @@ class PostIt {
   PostIt.fromFirestoreData({
     required Map<String, dynamic>? data,
   }) {
+    uid = data?['uid'];
     title = data?['title'];
     description = data?['description'];
     mbti = data?['mbti'];
