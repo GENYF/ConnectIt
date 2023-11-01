@@ -100,11 +100,21 @@ class FirestoreService {
     required ApplicationUser user,
     required PostIt postIt,
   }) async {
-    await _firestore.collection('board').doc(user.uid).update({
-      'postIt': postIt.toFirestore(),
+    final docReference = _firestore.collection('board').doc(user.uid);
+
+    await docReference.get().then((snapshot) {
+      if (snapshot.exists) {
+        docReference.update({
+          'postIt': postIt.toFirestore(),
+        }).onError((error, stackTrace) {
+          logger.e('[Firestore] 게시글 업데이트 실패\n$error\n$stackTrace');
+
+          throw Exception(error);
+        });
+      }
     }).onError((error, stackTrace) {
-      logger.e('[Firestore] 게시글 업데이트 실패\n$error\n$stackTrace');
-      
+      logger.e('[Firestore] 게시글 업데이트 실패\n$error\n$stackTrace');;
+
       throw Exception(error);
     });
   }
