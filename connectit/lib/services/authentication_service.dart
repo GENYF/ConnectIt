@@ -16,7 +16,7 @@ class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  SignInMethod? get signInMethod => _getCurrentLoginPlatform();
+  List<SignInMethod> get signInMethods => _getCurrentLoginPlatform();
 
   Future<UserCredential?> signIn({SignInMethod? signInMethod}) async {
     switch (signInMethod) {
@@ -80,9 +80,10 @@ class AuthenticationService {
   }
 
   Future<void> signOut() async {
-    SignInMethod? signInMethod = _getCurrentLoginPlatform();
+    List<SignInMethod> signInMethods = _getCurrentLoginPlatform();
 
-    switch (signInMethod!) {
+    // Google/Apple 로그인 동시 사용에 경우 Google 로그아웃을 시도
+    switch (signInMethods.first) {
       case SignInMethod.APPLE:
         await _signOutFromApple();
         break;
@@ -105,20 +106,19 @@ class AuthenticationService {
 }
 
 extension Utils on AuthenticationService {
-  SignInMethod? _getCurrentLoginPlatform() {
+  List<SignInMethod> _getCurrentLoginPlatform() {
     User user = FirebaseAuth.instance.currentUser!;
     List<UserInfo> providerData = user.providerData;
-    if (providerData.length != 1) {
-      logger.e('provider data length not 1');
-    }
+    List<SignInMethod> currentSignInMethods = [];
 
-    UserInfo currentProviderData = providerData.first;
-    SignInMethod? currentSignInMethod;
-    for (var platform in SignInMethod.values) {
-      if (platform.domain == currentProviderData.providerId) {
-        currentSignInMethod = platform;
+    for (var element in providerData) {
+      for (var platform in SignInMethod.values) {
+        if (platform.domain == element.providerId) {
+          currentSignInMethods.add(platform);
+        }
       }
     }
-    return currentSignInMethod;
+
+    return currentSignInMethods;
   }
 }
