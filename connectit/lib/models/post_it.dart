@@ -28,6 +28,7 @@ class PostIt {
   }) {
     final data = snapshot.data()?['postIt'];
 
+    uid = data?['uid'];
     title = data?['title'];
     description = data?['description'];
     mbti = data?['mbti'];
@@ -43,6 +44,7 @@ class PostIt {
   PostIt.fromFirestoreData({
     required Map<String, dynamic>? data,
   }) {
+    uid = data?['uid'];
     title = data?['title'];
     description = data?['description'];
     mbti = data?['mbti'];
@@ -56,6 +58,7 @@ class PostIt {
 
   Map<String, dynamic> toFirestore() {
     return {
+      'uid': uid ?? '',
       'title': title ?? '',
       'description': description ?? '',
       'mbti': mbti ?? '',

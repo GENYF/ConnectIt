@@ -37,9 +37,9 @@ class ProfileProvider with ChangeNotifier {
   }) async {
     _user = ApplicationUser.initialize(
       uid: user.uid,
-      name: user.displayName!,
-      email: user.email!,
-      photoURL: user.photoURL!,
+      name: user.displayName ?? 'Anonymous',
+      email: user.email,
+      photoURL: user.photoURL,
     );
 
     await _firestoreService.createUserCollection(user: _user!);
@@ -86,9 +86,9 @@ class ProfileProvider with ChangeNotifier {
   }
 
   Future<void> withdraw () async {
-    await _firestoreService.deleteUserCollection(user: _user!);
-    await _firestoreService.deletePostCollection(user: _user!);
-    await _firestoreService.deleteStorageCollection(user: _user!);
+    await _firestoreService.deleteUserCollection(uid: _user!.uid!);
+    await _firestoreService.deleteBoardCollection(uid: _user!.uid!);
+    await _firestoreService.deleteStorageCollection(uid: _user!.uid!);
 
     await signOut();
   }

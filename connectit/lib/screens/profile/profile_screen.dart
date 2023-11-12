@@ -55,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
                     isAction: false,
                   ),
                   ProfileInfoCard(
-                    userProfileUrl: user.photoURL!,
+                    userProfileUrl: user.photoURL,
                     userName: user.name!,
                     userEmail: user.email!,
                   ),

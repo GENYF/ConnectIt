@@ -22,7 +22,7 @@ class BoardProvider with ChangeNotifier {
   }
 
   Future<void> _load() async {
-    await _firestoreService.readPostCollection(user: _user!).then((value) {
+    await _firestoreService.readBoardCollection(user: _user!).then((value) {
       _postIts = value?.postIts;
     });
 
@@ -34,19 +34,19 @@ class BoardProvider with ChangeNotifier {
   }
 
   Future<void> attachPostIt({required PostIt postIt}) async {
-    await _firestoreService.createPostCollection(user: _user!, postIt: postIt).then((_) async {
+    await _firestoreService.createBoardCollection(user: _user!, postIt: postIt).then((_) async {
       await _load();
     });
   }
 
   Future<void> updatePostIt({required PostIt postIt}) async {
-    await _firestoreService.updatePostCollection(user: _user!, postIt: postIt).then((_) async {
+    await _firestoreService.updateBoardCollection(user: _user!, postIt: postIt).then((_) async {
       await _load();
     });
   }
 
   Future<void> detachPostIt({required PostIt postIt}) async {
-    await _firestoreService.deletePostCollection(user: _user!).then((_) async {
+    await _firestoreService.deleteBoardCollection(uid: postIt.uid!).then((_) async {
       await _load();
     });
   }
