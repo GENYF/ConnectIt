@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StorageProvider()),
       ],
       child: MaterialApp(
-        title: 'Alledin',
+        title: 'ConnectIt',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch(
