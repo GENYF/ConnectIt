@@ -98,17 +98,29 @@ class BoardScreen extends StatelessWidget {
     BoardProvider boardProvider = context.read<BoardProvider>();
     ProfileProvider profileProvider = context.read<ProfileProvider>();
 
-    await boardProvider.attachPostIt(postIt: profileProvider.postIt).then((_) {
+    if (profileProvider.postIt != null) {
+      await boardProvider.attachPostIt(postIt: profileProvider.postIt).then((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            duration: Duration(seconds: 2),
+            content: Text(
+              '내 포스트잇을 보드에 붙였습니다.',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      });
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           duration: Duration(seconds: 2),
           content: Text(
-            '내 포스트잇을 보드에 붙였습니다.',
+            '먼저 내 포스트잇을 작성해주세요.',
             textAlign: TextAlign.center,
           ),
         ),
       );
-    });
+    }
   }
 
   void _onTapPostIt(BuildContext context, {required PostIt postIt}) async {
