@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../utils/design.dart';
+import '../../../utils/design.dart';
 
-class CustomDialog extends StatelessWidget {
-  const CustomDialog({
+class SettingDialog extends StatelessWidget {
+  const SettingDialog({
     required String dialogTitle,
     required Widget dialogContent,
     required String buttonLabel,

@@ -1,7 +1,9 @@
+import 'package:connectit/screens/post/components/sns_id_text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/design.dart';
 
+// 포스트 작성 시 SNS ID를 입력하는 카드
 class PostSnsIdsEditCard extends StatelessWidget {
   const PostSnsIdsEditCard({
     super.key,
@@ -29,64 +31,19 @@ class PostSnsIdsEditCard extends StatelessWidget {
               hintText: 'Kakaotalk ID를 적어주세요.',
             ),
             const SizedBox(height: defaultSpacing),
-            TextField(
-              controller: _instagramIdController,
-              decoration: InputDecoration(
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(defaultSpacingHalf),
-                  child: Image.asset('assets/images/logos/instagram.png', width: 16, height: 16),
-                ),
-                prefix: const Text('@'),
-                border: const OutlineInputBorder(),
-                hintText: 'Instagram ID를 적어주세요.',
-              ),
+            SnsIdTextField(
+              textEditingController: _instagramIdController,
+              snsLogoPath: 'assets/images/logos/instagram.png',
+              hintText: 'Instagram ID를 적어주세요.',
             ),
             const SizedBox(height: defaultSpacing),
-            TextField(
-              controller: _facebookIdController,
-              decoration: InputDecoration(
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(defaultSpacingHalf),
-                  child: Image.asset('assets/images/logos/facebook.png', width: 16, height: 16),
-                ),
-                prefix: const Text('@'),
-                border: const OutlineInputBorder(),
-                hintText: 'Facebook ID를 적어주세요.',
-              ),
+            SnsIdTextField(
+              textEditingController: _facebookIdController,
+              snsLogoPath: 'assets/images/logos/facebook.png',
+              hintText: 'Facebook ID를 적어주세요.',
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class SnsIdTextField extends StatelessWidget {
-  const SnsIdTextField({
-    super.key,
-    required TextEditingController textEditingController,
-    required String snsLogoPath,
-    required String hintText,
-  }) :  _textEditingController = textEditingController,
-        _snsLogoPath = snsLogoPath,
-        _hintText = hintText;
-
-  final TextEditingController _textEditingController;
-  final String _snsLogoPath;
-  final String _hintText;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: _textEditingController,
-      decoration: InputDecoration(
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(defaultSpacingHalf),
-          child: Image.asset(_snsLogoPath, width: 16, height: 16),
-        ),
-        prefix: const Text('@'),
-        border: const OutlineInputBorder(),
-        hintText: _hintText,
       ),
     );
   }

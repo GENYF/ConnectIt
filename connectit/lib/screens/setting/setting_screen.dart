@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../components/custom_dialog.dart';
+import 'components/setting_dialog.dart';
 import '../../utils/design.dart';
 import '../../utils/logger.dart';
 import '../route_screen.dart';
@@ -81,7 +81,7 @@ class SettingScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CustomDialog(
+        return SettingDialog(
           dialogTitle: '애플리케이션 정보',
           dialogContent: const ApplicationInfo(),
           buttonLabel: '확인',
@@ -105,7 +105,7 @@ class SettingScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CustomDialog(
+        return SettingDialog(
           dialogTitle: '연결된 계정',
           dialogContent: Text(
             'E-mail: ${profileProvider.user.email}\nUser ID: ${profileProvider.user.uid}',
@@ -122,7 +122,7 @@ class SettingScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CustomDialog(
+        return SettingDialog(
           dialogTitle: '로그아웃 하시겠습니까?',
           dialogContent: Text(
             '로그아웃하셔도 다시 로그인하실 수 있습니다.',
@@ -145,7 +145,7 @@ class SettingScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CustomDialog(
+        return SettingDialog(
           dialogTitle: '회원 탈퇴',
           dialogContent: Text(
             '회원 탈퇴 시 지금까지 저장된 정보는 전부 사라집니다.',
